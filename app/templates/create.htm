@@ -1,0 +1,98 @@
+<!-- create.htm -->
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>
+            Protego Totalum
+        </title>
+        <style>
+            html { height:98%; }
+            body { height:100%; width:98%; }
+            table { width:60%; }
+            input { width:100%; }
+            form { margin:auto; }
+        </style>
+        <script language="javascript">
+            var getElem = function(Id){
+                return document.getElementById(Id)
+            }
+            
+            var validate = function(){
+                var FirstName = getElem("FirstName").value;
+                var LastName = getElem("LastName").value;
+                var Password = getElem("Password").value;
+                var EmailAddress = getElem("EmailAddress").value;
+                
+                if (FirstName.length == 0)
+                    alert("First Name cannot be empty");
+                else if (LastName.length == 0)
+                    alert("Last Name cannot be empty");
+                else if (Password.length == 0)
+                    alert("Password cannot be empty");
+                else if (Password.length < 8)
+                    alert("Password must be minimum 8 characters");
+                else if (EmailAddress.length == 0)
+                    alert("Email Address cannot be empty");
+                else if (EmailAddress.length == 0)
+                    alert("Email Address cannot be empty");
+                else if(!validateEmail(EmailAddress))
+                    alert("Please enter a proper Email Address")
+                else
+                    createIdentity()
+            }
+            
+            var validateEmail = function(email){
+                return true
+            }
+            
+            var createIdentity = function(){
+                var IdentityForm = getElem("IdentityCreationForm");
+                IdentityForm.submit();
+            }
+        </script>
+    </head>
+    <body>
+        <div style="width:100%;">
+            <span class="title">Protego Totalum</a></span>
+            <div style="float:right; padding-top:10px;">
+                Hi {{ userid }} | <a href="/?session={{ sessionid }}" style="text-decoration:none; color:black;">Home</a> | <a href="/{{ userid }}/logout?session={{ sessionid }}" style="text-decoration:none; color:black;">Logout</a>
+            </div>
+        </div>
+        <form name="IdentityCreationForm" id="IdentityCreationForm" method="post">
+            <table>
+                <tr>
+                    <td>First Name</td>
+                    <td>&nbsp;</td>
+                    <td><input type="text" name="FirstName" id="FirstName" placeholder="First Name"/></td>
+                    <td>&nbsp;</td>
+                    <td>Last Name</td>
+                    <td>&nbsp;</td>
+                    <td><input type="text" name="LastName" id="LastName" placeholder="Last Name"/></td>
+                </tr>
+                <tr>
+                    <td>User Id</td>
+                    <td>&nbsp;</td>
+                    <td><input type="text" name="UserId" id="UserId" placeholder="User Id" readonly = readonly/></td>
+                    <td>&nbsp;</td>
+                    <td>Password</td>
+                    <td>&nbsp;</td>
+                    <td><input type="password" name="Password" id="Password" placeholder="Password"/></td>
+                </tr>
+                <tr>
+                    <td>Email Address</td>
+                    <td>&nbsp;</td>
+                    <td colspan="5"><input type="email" name="EmailAddress" id="EmailAddress" placeholder="Email Address"/></td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="text-align:center;">
+                        <input type="button" id="createIdentity" name="createIdentity" value="Create" style="width:100px;" onClick="javascript:validate();"/>
+                    </td>
+                    <td>&nbsp;</td>
+                    <td colspan="3" style="text-align:center;">
+                        <input type="reset" value="Clear" style="width:100px;"/>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>
