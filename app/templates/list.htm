@@ -1,0 +1,59 @@
+<!-- list.htm -->
+{% set currentuser = userid %}
+{% set sequenceno = 1 %}
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>
+            Protego Totalum
+        </title>
+        <style>
+            html { height:98%; }
+            body { height:100%; width:98%; }
+            table { width:60%; margin:auto; padding:5px;}
+            td { padding:5px; }
+        </style>
+        <script language="javascript">
+            var manageUser = function(action, key){
+                if (action == 'edit') {
+                    window.location.href = '/{{ currentuser }}/update/' + key;
+                } else if (action == 'delete') {
+                    form = document.createElement('form');
+                    form.method='POST';
+                    form.action = '/{{ currentuser }}/delete/' + key +'?session={{ sessionid }}';
+                    form.submit();
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <div style="width:100%;">
+            <span class="title">Protego Totalum</a></span>
+            <div style="float:right; padding-top:10px;">
+                Hi {{ userid }} | <a href="/?session={{ sessionid }}" style="text-decoration:none; color:black;">Home</a> | <a href="/{{ userid }}/logout?session={{ sessionid }}" style="text-decoration:none; color:black;">Logout</a>
+            </div>
+        </div>
+        <table>
+            <tr>
+                <th>S.No</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email Address</th>
+                <th>&nbsp;</th>
+            </td>
+            {% for user in users %}
+                <tr>
+                    <td style="text-align:center;">{{ sequenceno }}</td>
+                    <td>{{ user.FirstName }}</td>
+                    <td>{{ user.LastName }}</td>
+                    <td>{{ user.EmailAddress }}</td>
+                    <td style="text-align:center;">
+                        <a onClick="javascript:manageUser('edit','{{ user.key.id() }}');">edit</a>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a onClick="javascript:manageUser('delete','{{ user.key.id() }}');">delete</a>
+                    </td>
+                </tr>
+                {% set sequenceno = sequenceno + 1 %}
+            {% endfor %}
+    </body>
+</html>
