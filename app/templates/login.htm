@@ -1,0 +1,47 @@
+<!-- Login.htm -->
+<!-- Protego Totalum - Provides protection of some form for an area or dwelling. -->
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>
+            Protego Totalum
+        </title>
+        <style>
+            html {height:98%;}
+            body {height:100%; width:98%;}
+            #loginformcontainer {text-align:right;}
+            .pagecenter {text-align:center; vertical-align:middle;}
+            .title {font-size:5em; font-weight:bold; font-style:italic;}
+        </style>
+        <script language="javascript">
+            var Login = function(){
+                var UserId = getElem('UserId').value;
+                form = getElem('loginform');
+                form.action = "/" + UserId + "/authenticate";
+                form.submit();
+            }
+            
+            var getElem = function(id){
+                return document.getElementById(id);
+            }
+        </script>
+    </head>
+    <body>
+        <div id="loginformcontainer">
+            <form id="loginform" method="post">
+                Email Address : <input type="text" id="UserId" name="UserId" placeholder="Email Address"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                Password : <input type="password" id="Password" name="Password" placeholder="Password"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="button" id="loginbutton" name="loginbutton" value="Login" onClick="javascript:Login();"/>
+            </form>
+        </div>
+        <table style="width:100%; height:80%;">
+            <tr>
+                <td class='pagecenter'>
+                    <span class="title"><a href="/" style="text-decoration:none; color:black;">Protego Totalum</a></span>
+                    <br/>
+                    Provides protection of some form for an area or dwelling...
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>
