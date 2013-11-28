@@ -62,7 +62,8 @@ class MainHandler(webapp2.RequestHandler):
 
     def post(self, UserId, action = None, Key = None):
         SessionId = self.request.get("session")
-        action = action.strip()
+        if action:
+            action = action.strip()
         if action == 'authenticate':
             auth = authentication()
             authenticated, sessionId = auth.authenticate(UserId, self.request.get('Password'))
