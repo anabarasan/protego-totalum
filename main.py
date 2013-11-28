@@ -27,7 +27,7 @@ class MainHandler(webapp2.RequestHandler):
         else:
             SessionId = self.request.get("session")
             if (isAuthenticated(UserId, SessionId)): # Check if User is logged in and Session is valid
-                if ('administrator@' in UserId) and (action != 'logout'): # Check if User is admin, else redirect to logged in User's Page
+                if ('administrator@' not in UserId) and (action != 'logout'): # Check if User is admin, else redirect to logged in User's Page
                     action = 'update' 
                     Key = str(identity(UserId).getUserById().key.id())
                 
