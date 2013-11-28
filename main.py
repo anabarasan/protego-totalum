@@ -44,10 +44,10 @@ class MainHandler(webapp2.RequestHandler):
                             self.error(400) # Bad Request Key not given
                         else:
                             userInstance = identity(UserId, Key.strip())
-                            if (UserId == 'admin') or (UserId == userInstance.getUserId()):
+                            if ('administrator@' in UserId) or (UserId == userInstance.getUserId()):
                                 self.response.out.write(renderTemplate('update.htm',{'userid':UserId, 'sessionid' : SessionId, 'userinfo':identity(UserId, Key.strip()).getUser()}))
                             else:
-                                self.response.out.write(renderTemplate('message.htm',{'message' : 'You are not authorized to edit this record', 'redirectURL' : '/%s?session=' % (UserId, SessionId)}))
+                                self.response.out.write(renderTemplate('message.htm',{'message' : 'You are not authorized to edit this record', 'redirectURL' : '/%s?session=%s' % (UserId, SessionId)}))
                     elif action == 'delete':
                         self.error(405) # delete should not be called via GET
                         
