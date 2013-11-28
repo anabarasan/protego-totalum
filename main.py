@@ -90,7 +90,7 @@ class MainHandler(webapp2.RequestHandler):
                         
                     elif action == 'update':
                         userInstance = identity(UserId, Key.strip())
-                        if (UserId == 'admin') or (UserId == userInstance.getUserId()):
+                        if ('administrator@' in UserId) or (UserId == userInstance.getUserId()):
                             user = {}
                             user['firstName'] = self.request.get('FirstName')
                             user['lastName'] = self.request.get('LastName')
@@ -106,7 +106,7 @@ class MainHandler(webapp2.RequestHandler):
                         userInstance = identity(UserId, Key.strip())
                         if (userInstance.getUserId() == UserId):
                             self.response.out.write(renderTemplate('message.htm',{'message' : 'Cannot delete the currently logged in User.\nPlease login as a different user and try again.', 'redirectURL' : '/%s/list?session=%s' % (UserId, SessionId)}))
-                        elif (UserId == 'admin') and (userInstance.getUserId() == 'admin'):
+                        elif ('administrator@' in UserId) and ('administrator@' in userInstance.getUserId()):
                             self.response.out.write(renderTemplate('message.htm',{'message' : 'Only an Admin can delete another admin.', 'redirectURL' : '/%s/list?session=%s' % (UserId, SessionId)}))
                         else:
                             firstName = userInstance.getFirstName()
