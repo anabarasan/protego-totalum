@@ -16,7 +16,7 @@
         <script language="javascript">
             var manageUser = function(action, key){
                 if (action == 'edit') {
-                    window.location.href = '/{{ currentuser }}/update/' + key;
+                    window.location.href = '/{{ currentuser }}/update/' + key +'?session={{ sessionid }}';;
                 } else if (action == 'delete') {
                     form = document.createElement('form');
                     form.method='POST';
